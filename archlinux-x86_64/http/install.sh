@@ -30,14 +30,14 @@ vagrant
 EOF
 
 # Setup timezone
-ln -s /usr/share/zoneinfo/America/Boise /etc/localtime
+ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # Setup language/locale settings
-echo 'LANG=en_US.UTF-8' > /etc/locale.conf
-export LANG=en_US.UTF-8
-sed -i -e 's/\\#en\\_US/en\\_US/g' /etc/locale.gen
+#@echo 'LANG=en_JP.UTF-8' > /etc/locale.conf
+export LANG=en_JP.UTF-8
+sed -i -e 's/\\#ja\\_JP/ja\\_JP/g' /etc/locale.gen
 locale-gen
-echo 'KEYMAP=us' > /etc/vconsole.conf
+echo 'KEYMAP=jp106' > /etc/vconsole.conf
 echo 'vagrant-arch' > /etc/hostname
 
 # PACMAN_REFLECTOR_ARGS can be used to pick a suitable mirror for pacman

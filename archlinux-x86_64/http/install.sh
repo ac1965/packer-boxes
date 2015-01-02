@@ -16,6 +16,11 @@ mount /dev/sda3 /mnt
 mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
 
+if [ -f /etc/pacman.d/mirrorlist ]; then
+    grep '\.jp/' /etc/pacman.d/mirrorlist | sed "s/#Server/Server/g" > _mirrorlist
+    mv _mirrorlist /etc/pacman.d/mirrorlist
+fi
+
 # Get reflector so that we can update the mirrorlist
 pacstrap /mnt base reflector
 
@@ -33,7 +38,6 @@ EOF
 ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # Setup language/locale settings
-#@echo 'LANG=en_JP.UTF-8' > /etc/locale.conf
 export LANG=en_JP.UTF-8
 sed -i -e 's/\\#ja\\_JP/ja\\_JP/g' /etc/locale.gen
 locale-gen
@@ -77,4 +81,3 @@ umount /dev/sda1
 umount /dev/sda3
 swapoff /dev/sda2
 reboot
-
